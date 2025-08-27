@@ -27,7 +27,7 @@ struct Graph: View {
     
     // Computamos las 3 peores horas
     var worstHours: [(String, Int)] {
-        let pairs = Array(zip(hours, values)) 
+        let pairs = Array(zip(hours, values))
         return pairs.sorted(by: { $0.1 > $1.1 }).prefix(3).map { $0 }
     }
     
@@ -42,7 +42,7 @@ struct Graph: View {
                         x: .value("Hora", hour),
                         y: .value("Saturación", value)
                     )
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(Color(red: 1 , green: 0.6, blue: 0))
                 }
             }
             .chartXAxis {
