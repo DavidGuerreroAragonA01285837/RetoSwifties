@@ -18,6 +18,7 @@ struct Main: View {
                 Text("Bienvenido a Clinica NOVA")
                     .padding(.top, 150)
                     .font(.title)
+                    .underline()
                 Spacer()
             }
         }
@@ -32,7 +33,9 @@ struct Main: View {
                 .interactiveDismissDisabled(true) // evita cerrar con swipe down
         }
         HStack(spacing: 20) {
-            Button(action: {}) {
+            Button(action: {
+                
+            }) {
                 Image(systemName: "text.book.closed")
                     .font(.system(size: 20))
                     .foregroundColor(.black)
@@ -43,7 +46,9 @@ struct Main: View {
                     )
             }
 
-            Button(action: {}) {
+            Button(action: {
+                
+            }) {
                 Image(systemName: "map")
                     .font(.system(size: 20))
                     .foregroundColor(.black)
@@ -54,7 +59,9 @@ struct Main: View {
                     )
             }
 
-            Button(action: {}) {
+            Button(action: {
+                
+            }) {
                 Image(systemName: "phone.arrow.up.right.circle")
                     .font(.system(size: 20))
                     .foregroundColor(.black)
