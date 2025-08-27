@@ -10,15 +10,22 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            TabView {
+                    InicioView()
+                    .tabItem{
+                    Label("Inicio", systemImage: "house.circle")
+                    }
+                    Graph()
+                    .tabItem{
+                        Label("Graficas", systemImage: "chart.bar")
+                    }
+            }.tint(Color(red: 1, green: 153/255, blue: 0))
         }
         .padding()
     }
+    
+    
 }
-
 #Preview {
     ContentView()
 }
