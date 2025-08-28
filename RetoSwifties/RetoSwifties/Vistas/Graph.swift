@@ -35,6 +35,8 @@ struct Graph: View {
         VStack {
             Text("Saturación por Hora")
                 .font(.title)
+                .bold(true)
+                .foregroundColor(Color(red: 242/255, green: 242/255, blue: 242/255))
             
             Chart {
                 ForEach(Array(zip(hours, values)), id: \.0) { hour, value in
@@ -61,7 +63,7 @@ struct Graph: View {
             HStack{
                 ForEach(worstHours, id: \.0) { hour, value in
                     Text("\(hour)")
-                        .foregroundColor(.red)
+                        .foregroundColor(Color(red: 242/255, green: 242/255, blue: 242/255))
                 }
             }
         }

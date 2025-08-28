@@ -23,8 +23,9 @@ struct Main: View {
             }
             VStack {
                 Image("hospital_clnica_nova_logo")
-                    .padding(.top, 10)
+                    .padding(.top, 20)
                 Text("Bienvenido a Clinica NOVA")
+                    .foregroundColor(Color(red: 102/255, green: 102/255, blue: 102/255))
                     .padding(.top, 120)
                     .font(.title)
                     .bold(true)
@@ -38,23 +39,23 @@ struct Main: View {
                     .cornerRadius(8)
                     .padding(.top, 40)
   
-                
-
-                
                 Spacer()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity) // ocupa toda la pantalla
-        .contentShape(Rectangle()) // hace clickeable todo
+        
+        .contentShape(Rectangle()) // hace clickeable toda la pantalla
         .onTapGesture {
             irASiguiente = true
         }
+        
         //fullScreenCover hace que no puedas volver a la pantalla
         //anterior
         .fullScreenCover(isPresented: $irASiguiente) {
             SolicitudView()
-                .interactiveDismissDisabled(true) // evita cerrar con swipe down
+                .interactiveDismissDisabled(true) // evita cerrar con swipe
         }
+        
         HStack(spacing: 20) {
             Button(action: {
                 mostrarSheet1=true
@@ -62,7 +63,8 @@ struct Main: View {
                 Image(systemName: "text.book.closed")
                     .font(.system(size: 20))
                     .foregroundColor(.black)
-                    .frame(width: 56, height: 56) // tamaño fijo e igual para todos
+                    .frame(width: 56, height: 56)
+                // tamaño fijo e igual para todos los botones
                     .background(
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color(red: 217/255, green: 217/255, blue: 217/255))
@@ -126,8 +128,8 @@ struct Main: View {
                     .padding()
             })
         }
-        .frame(maxWidth: .infinity, alignment: .leading) // margenes pegados a la izquierda
-        .padding(.horizontal, 24) // margen con los bordes
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 24)
         .padding(.vertical, 12)
         .padding(.top, 16)
         
