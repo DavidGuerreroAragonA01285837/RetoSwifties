@@ -1,10 +1,9 @@
 //
-//  SwiftUIView.swift
+//  Main.swift
 //  RetoSwifties
 //
-//  Created by Alumno on 28/08/25.
+//  Created by Alumno on 27/08/25.
 //
-
 
 import SwiftUI
 
@@ -26,9 +25,16 @@ struct Main: View {
                 Image("hospital_clnica_nova_logo")
                     .padding(.top, 50)
                 Text("Bienvenido a Clinica NOVA")
-                    .padding(.top, 150)
+                    .padding(.top, 100)
                     .font(.title)
-                    .underline()
+                    .bold(true)
+                Text("Comenzar")
+                    .font(.title2)
+                    .background(Color(red: 1/255, green: 104/255, blue: 138/255))
+                    .foregroundStyle(Color(red: 242/255, green: 242/255, blue: 242/255))
+                    .padding(.top, 40)
+
+                
                 Spacer()
             }
         }
@@ -37,7 +43,8 @@ struct Main: View {
         .onTapGesture {
             irASiguiente = true
         }
-        // En lugar de usar NavigationStack, usamos fullScreenCover
+        //fullScreenCover hace que no puedas volver a la pantalla
+        //anterior
         .fullScreenCover(isPresented: $irASiguiente) {
             SolicitudView()
                 .interactiveDismissDisabled(true) // evita cerrar con swipe down
@@ -113,7 +120,7 @@ struct Main: View {
                     .padding()
             })
         }
-        .frame(maxWidth: .infinity, alignment: .leading) // si los quieres pegados a la izquierda
+        .frame(maxWidth: .infinity, alignment: .leading) // margenes pegados a la izquierda
         .padding(.horizontal, 24) // margen con los bordes
         .padding(.top, 16)
         
