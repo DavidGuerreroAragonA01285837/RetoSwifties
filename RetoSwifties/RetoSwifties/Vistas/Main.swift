@@ -128,6 +128,7 @@ struct Main: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading) // margenes pegados a la izquierda
         .padding(.horizontal, 24) // margen con los bordes
+        .padding(.vertical, 12)
         .padding(.top, 16)
         
 
