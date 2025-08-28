@@ -18,21 +18,27 @@ struct Main: View {
             GeometryReader { geo in
                     Rectangle()
                         .fill(Color(red: 0.0039, green: 0.4078, blue: 0.5411))
-                        .frame(height: geo.size.height / 3.5) // mitad de la pantalla
+                        .frame(height: geo.size.height / 2) // mitad de la pantalla
                         .edgesIgnoringSafeArea(.top)
             }
             VStack {
                 Image("hospital_clnica_nova_logo")
-                    .padding(.top, 50)
+                    .padding(.top, 10)
                 Text("Bienvenido a Clinica NOVA")
-                    .padding(.top, 100)
+                    .padding(.top, 120)
                     .font(.title)
                     .bold(true)
                 Text("Comenzar")
                     .font(.title2)
+                    .bold(true)
+                    .padding(.horizontal, 40)
+                    .padding(.vertical, 12)
                     .background(Color(red: 1/255, green: 104/255, blue: 138/255))
                     .foregroundStyle(Color(red: 242/255, green: 242/255, blue: 242/255))
+                    .cornerRadius(8)
                     .padding(.top, 40)
+  
+                
 
                 
                 Spacer()
