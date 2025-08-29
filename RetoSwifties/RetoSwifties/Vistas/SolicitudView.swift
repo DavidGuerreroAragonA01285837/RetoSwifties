@@ -29,12 +29,13 @@ struct SolicitudView: View {
                     Text("Tiempo estimado: ")
                         .bold()
                         .font(.title2)
-                        .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
+                        .foregroundColor(Color(red: 242/255, green: 242/255, blue: 242/255))
                         .padding(.vertical, 15)
                         .padding(.horizontal, 10)
                         .background(Color(red: 1.0, green: 0.6, blue: 0.0))
                         .cornerRadius(10)
                         .padding(.top, 50)
+                
                     
                     Text("20 min")
                         .font(.title)

@@ -128,7 +128,7 @@ struct Main: View {
                     .padding()
             })
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity)
         .padding(.horizontal, 24)
         .padding(.vertical, 12)
         .padding(.top, 16)
@@ -137,39 +137,6 @@ struct Main: View {
         }
     }//Cierre del view
     
-
-struct FirstSheetView: View {
-    var body: some View {
-        VStack {
-            Text("Este es el primer sheet")
-                .font(.title)
-            Button("Cerrar") {
-                // se cierra automáticamente con swipe
-            }
-        }
-        .padding()
-    }
-}
-
-struct SecondSheetView: View {
-    var body: some View {
-        VStack {
-            Text("Aquí se muestra el segundo sheet")
-                .font(.title)
-        }
-        .padding()
-    }
-}
-
-struct ThirdSheetView: View {
-    var body: some View {
-        VStack {
-            Text("Este es el tercer sheet")
-                .font(.title)
-        }
-        .padding()
-    }
-}
 
 #Preview {
     Main()
