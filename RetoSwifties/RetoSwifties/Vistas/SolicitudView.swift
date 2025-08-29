@@ -18,7 +18,7 @@ struct SolicitudView: View {
                         .ignoresSafeArea(edges: .top)
 
                     Graph()
-                        .padding(.top, 20)
+                        .padding(.top, 18)
                         .padding(.horizontal, 16)
                 }
                 

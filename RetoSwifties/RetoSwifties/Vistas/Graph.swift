@@ -57,8 +57,8 @@ struct Graph: View {
             .frame(height: 250)
             .padding()
 
-            
-            Text("⛔  Horas mas llenas:")
+            .padding(.vertical, 5)
+            Text("Horas mas llenas:")
                 .font(.headline)
             HStack{
                 ForEach(worstHours, id: \.0) { hour, value in
