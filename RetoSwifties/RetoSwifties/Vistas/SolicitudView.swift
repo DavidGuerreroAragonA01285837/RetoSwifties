@@ -14,17 +14,14 @@ struct SolicitudView: View {
         NavigationStack {
             VStack {
                 ZStack {
-                    // Fondo azul que llega hasta arriba del notch
                     Color(red: 0.0039, green: 0.4078, blue: 0.5411)
                         .ignoresSafeArea(edges: .top)
 
-                    // Tu gráfica encima
                     Graph()
                         .padding(.top, 20)
                         .padding(.horizontal, 16)
                 }
                 
-                // Altura de la franja superior (ajústala a tu gusto)
                 .frame(height: 500)
                 .clipped()
                 
@@ -35,7 +32,7 @@ struct SolicitudView: View {
                         .foregroundColor(Color(red: 68/255, green: 68/255, blue: 68/255))
                         .padding(.vertical, 15)
                         .padding(.horizontal, 10)
-                        .background(Color(red: 1.0, green: 0.6, blue: 0.0)) // naranja
+                        .background(Color(red: 1.0, green: 0.6, blue: 0.0))
                         .cornerRadius(10)
                         .padding(.top, 50)
                     

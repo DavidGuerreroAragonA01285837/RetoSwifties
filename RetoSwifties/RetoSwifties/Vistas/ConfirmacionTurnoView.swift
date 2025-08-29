@@ -17,7 +17,8 @@ struct ConfirmacionTurnoView: View {
             Text("¡Turno Confirmado!")
                 .font(.system(size: 35, weight: .bold))
                 .frame(width: 350, height: 48)
-                .background(Color(red: 211/255, green: 211/255, blue: 211/255))
+                .background(Color(red: 1/255, green: 104/255, blue: 138/255))
+                .foregroundStyle(Color.white)
                 .cornerRadius(10)
                 .padding(.vertical, 25)
             TurnNumberComponent(numeroTurno: numeroTurno)
@@ -37,13 +38,25 @@ struct ConfirmacionTurnoView: View {
             .padding(.vertical, 30)
             .padding(.horizontal, 40)
             
-            Text("Sirviendo al turno")
-                .font(.system(size: 30, weight: .bold))
-                .foregroundStyle(Color(red:102/255, green: 102/255, blue: 102/255))
-                .frame(width: 310)
-                .background(Color(red: 211/255, green: 211/255, blue: 211/255))
-                .cornerRadius(10)
-            TurnNumberComponent(numeroTurno: turnoActual, size: 150, fontSize: 40)
+            HStack{
+                Text("Atendiendo turno:")
+                    .font(.system(size: 25, weight: .bold))
+                    .frame(width: 200)
+                    .foregroundStyle(Color(red:102/255, green: 102/255, blue: 102/255))
+                    .background(Color(red: 211/255, green: 211/255, blue: 211/255))
+                    .cornerRadius(10)
+                Spacer()
+                Text(String(turnoActual))
+                    .font(.system(size: 35, weight: .bold))
+            }
+            .frame(width: 310)
+            .padding(.vertical, 30)
+            .padding(.horizontal, 40)
+            
+            Text("Recuerda traer receta")
+                .font(.system(size: 25, weight: .bold))
+                .foregroundStyle(Color(red: 1, green: 153/255, blue: 0))
+                .padding(.top, 30)
             
             
             Spacer()
@@ -55,7 +68,7 @@ struct ConfirmacionTurnoView: View {
                     .font(.system(size: 21, weight: .bold))
             }
             .buttonStyle(.borderedProminent)
-            .tint(Color(red: 211/255, green: 211/255, blue: 211/255))
+            .tint(Color.red)
             .padding(.bottom, 13)
             .cornerRadius(10)
         }
