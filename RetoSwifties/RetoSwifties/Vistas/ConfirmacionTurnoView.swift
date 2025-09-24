@@ -12,6 +12,7 @@ struct ConfirmacionTurnoView: View {
     @State public var folio: String = "XXXXXX"
     @State public var numeroTurno: Int = 123
     @State public var turnoActual: Int = 110
+    @StateObject var solicitudTurno = TurnViewModel()
     var body: some View {
         VStack(){
             Text("¡Turno Confirmado!")
@@ -63,7 +64,11 @@ struct ConfirmacionTurnoView: View {
             
             Spacer()
             Button{
-                dismiss()
+                if let intValue = Int(folio) {
+                    solicitudTurno.deleteTurn(serviceID: intValue)
+                    dismiss()
+                }
+                
             }label:{
                 Text("Cancelar")
                     .frame(width: 290, height: 30)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SolicitudView: View {
     @State private var SiguientePantalla = false
-    
+    @StateObject var solicitudTurno = TurnViewModel()
     var body: some View {
         NavigationStack {
             VStack {
@@ -46,20 +46,33 @@ struct SolicitudView: View {
                 }
                 
                 Button(action: {
-                    SiguientePantalla = true
+                    // Call the API and wait for the response before navigating
+                    solicitudTurno.requestTurn(preferential: 0) { turn in
+                        if turn != nil {
+                            // Navigate only after the API returns
+                            SiguientePantalla = true
+                        }
+                    }
                 }) {
                     Text("Obtener turno")
                         .font(.title2)
                         .bold()
                         .padding(.horizontal, 30)
                         .padding(.vertical, 16)
-                        .background(Color(red: 0.0039, green: 0.4078, blue: 0.5411)) // azul
+                        .background(Color(red: 0.0039, green: 0.4078, blue: 0.5411))
                         .foregroundColor(Color(red: 242/255, green: 242/255, blue: 242/255))
                         .cornerRadius(10)
                 }
                 .padding(.top, 50)
                 .navigationDestination(isPresented: $SiguientePantalla) {
-                    ConfirmacionTurnoView()
+                    if let turn = solicitudTurno.turn {
+                        ConfirmacionTurnoView(
+                            folio: "\(turn.ServiceID)",
+                            numeroTurno: turn.TurnNumber,
+                            turnoActual: turn.NextTurn
+                        )
+                    }
+
                 }
                 
                 Spacer()
