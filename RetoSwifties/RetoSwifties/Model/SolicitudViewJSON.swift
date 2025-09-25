@@ -114,46 +114,42 @@ class TurnViewModel: ObservableObject {
         }.resume()
     }
     
-    func fetchHourTotals(completion: (([Int]) -> Void)? = nil) {
-            guard let url = URL(string: "https://10.14.255.40:10206/turnos/hourTotals") else { return }
+    @Published var hourTotals: [Int] = Array(repeating: 0, count: 24)  // default zeros
 
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
+    func fetchHourTotals() {
+        guard let url = URL(string: "https://10.14.255.40:10206/turnos/frecuencia") else { return }
 
-            let session = URLSession(configuration: .default, delegate: UnsafeSessionDelegate(), delegateQueue: nil)
+        // Use UnsafeSessionDelegate to bypass certificate validation
+        let session = URLSession(configuration: .default, delegate: UnsafeSessionDelegate(), delegateQueue: nil)
 
-            session.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    print("GET error:", error)
-                    completion?([])
-                    return
+        session.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("GET error:", error)
+                return
+            }
+
+            guard let data = data else { return }
+
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Raw response:", jsonString)
+            }
+
+            do {
+                // Decode JSON as an array of HourTotal
+                let decoded = try JSONDecoder().decode([HourTotal].self, from: data)
+
+                // Extract only the 'Total' values
+                let totals = decoded.map { $0.Total }
+
+                DispatchQueue.main.async {
+                    self.hourTotals = totals
                 }
+            } catch {
+                print("Decoding error:", error)
+            }
+        }.resume()
+    }
 
-                if let http = response as? HTTPURLResponse {
-                    print("GET status code:", http.statusCode)
-                }
-
-                guard let data = data else {
-                    completion?([])
-                    return
-                }
-
-                if let jsonString = String(data: data, encoding: .utf8) {
-                    print("Raw response:", jsonString)
-                }
-
-                do {
-                    let decoded = try JSONDecoder().decode([HourTotal].self, from: data)
-                    let totals = decoded.map { $0.Total }
-                    DispatchQueue.main.async {
-                        completion?(totals)
-                    }
-                } catch {
-                    print("Decoding error:", error)
-                    completion?([])
-                }
-            }.resume()
-        }
 
 
 }

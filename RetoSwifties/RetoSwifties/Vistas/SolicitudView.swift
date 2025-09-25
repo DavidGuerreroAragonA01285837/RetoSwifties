@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SolicitudView: View {
     @State private var SiguientePantalla = false
+    @State private var graphValues = [0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 295, 0, 0, 0, 0, 0]
     @StateObject var solicitudTurno = TurnViewModel()
     var body: some View {
         NavigationStack {
@@ -21,7 +22,6 @@ struct SolicitudView: View {
                         .padding(.top, 18)
                         .padding(.horizontal, 16)
                 }
-                
                 .frame(height: 500)
                 .clipped()
                 
