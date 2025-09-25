@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 
-// MARK: - Unsafe delegate for self-signed certificates
+
 class UnsafeSessionDelegate: NSObject, URLSessionDelegate {
     func urlSession(_ session: URLSession,
                     didReceive challenge: URLAuthenticationChallenge,
@@ -22,7 +22,7 @@ class UnsafeSessionDelegate: NSObject, URLSessionDelegate {
     }
 }
 
-// MARK: - ViewModel to make API call
+
 class TurnViewModel: ObservableObject {
     @Published var turn: TurnResponse? = nil
     
@@ -33,7 +33,6 @@ class TurnViewModel: ObservableObject {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        // Body with Preferential only
         let body: [String: Any] = ["Preferential": preferential]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
@@ -55,7 +54,7 @@ class TurnViewModel: ObservableObject {
             }
 
             if let data = data {
-                // Print raw response for debugging
+                
                 if let jsonString = String(data: data, encoding: .utf8) {
                     print("Raw response:\n\(jsonString)")
                 }
@@ -83,10 +82,10 @@ class TurnViewModel: ObservableObject {
         guard let url = URL(string: "https://10.14.255.40:10206/turnos/eliminar") else { return }
 
         var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"  // or DELETE if your API accepts it
+        request.httpMethod = "DELETE"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        // Body with serviceID
+        
         let body: [String: Any] = ["serviceID": serviceID]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
@@ -107,12 +106,54 @@ class TurnViewModel: ObservableObject {
                 if let jsonString = String(data: data, encoding: .utf8) {
                     print("Raw response:", jsonString)
                 }
-                // Optional: check if deleted_serviceID exists in the response
+                
                 completion?(true)
             } else {
                 completion?(false)
             }
         }.resume()
     }
+    
+    func fetchHourTotals(completion: (([Int]) -> Void)? = nil) {
+            guard let url = URL(string: "https://10.14.255.40:10206/turnos/hourTotals") else { return }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+
+            let session = URLSession(configuration: .default, delegate: UnsafeSessionDelegate(), delegateQueue: nil)
+
+            session.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("GET error:", error)
+                    completion?([])
+                    return
+                }
+
+                if let http = response as? HTTPURLResponse {
+                    print("GET status code:", http.statusCode)
+                }
+
+                guard let data = data else {
+                    completion?([])
+                    return
+                }
+
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("Raw response:", jsonString)
+                }
+
+                do {
+                    let decoded = try JSONDecoder().decode([HourTotal].self, from: data)
+                    let totals = decoded.map { $0.Total }
+                    DispatchQueue.main.async {
+                        completion?(totals)
+                    }
+                } catch {
+                    print("Decoding error:", error)
+                    completion?([])
+                }
+            }.resume()
+        }
+
 
 }

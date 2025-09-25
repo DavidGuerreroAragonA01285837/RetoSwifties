@@ -9,6 +9,7 @@ import SwiftUI
 import Charts
 
 struct Graph: View {
+    
     // Lista de horas (etiquetas)
     let hours = [
         "1 AM","2 AM","3 AM","4 AM","5 AM","6 AM",
